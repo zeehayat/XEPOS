@@ -7,7 +7,7 @@
 </template>
 <script setup>
 import {ref} from 'vue'
-import axios from 'axios'
+import api from './api'
 const formData=ref({
     name:'',
     email:'',
@@ -16,10 +16,12 @@ const formData=ref({
 })
 
 function submit(){
-
-    axios.post('/api/company', this.formData).then(response => {
-        console.log(response.data)
+    api.addCompany(this.formData).then(response=>{
+        console.log(response)
     })
+    // axios.post('/api/company', this.formData).then(response => {
+    //     console.log(response.data)
+    // })
 }
 // const name=ref('')
 // const email=ref('')
