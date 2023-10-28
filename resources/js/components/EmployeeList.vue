@@ -1,11 +1,17 @@
 <script setup>
 import {ref,onMounted} from 'vue'
+
 import axios from 'axios';
 const employeeList=ref('')
-
+const first_name=ref('')
+const last_name = ref('')
+const company = ref('')
+const email = ref('')
+const phone = ref('')
+const company_list=ref('')
 onMounted(() => {
-    console.log('Mounted')
-     axios.get('api/employee/2').then(response => {
+
+     axios.get('api/employee/').then(response => {
         employeeList.value=response.data
         console.log(response.data)
 
@@ -13,11 +19,16 @@ onMounted(() => {
 })
 function edit(){
 
-    alert("editing")
+    //router.push
 }
 
-function del(){
-alert('Deleting')
+function del(id){
+var cfrm=confirm("Are you sure you want to delete")
+if(cfrm){
+    axios.delete('/api/employee/'+id).then(response=>{
+        alert("Succesfully deleted")
+    })
+}
 }
 
 function view(){
@@ -30,6 +41,7 @@ alert("viewing")
     <table  class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
+                <td>ID</td>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Company ID</th>
@@ -41,6 +53,7 @@ alert("viewing")
             <tbody>
 
                 <tr v-for="el in employeeList"  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <td>{{ el.id }}</td>
                     <td>{{ el.first_name }}</td>
                     <td>{{ el.last_name }}</td>
                     <td>{{ el.company_id }}</td>
@@ -48,8 +61,8 @@ alert("viewing")
                     <td>{{ el.phone }}</td>
                     <td>
                         <button class="p-1 m-2 rounded bg-blue-400 text-white" @click="view">View</button>
-                        <button class="p-1 m-2 rounded bg-yellow-400 text-red" @click="edit">Edit</button>
-                        <button class="p-1 m-2 rounded bg-red-400 text-white" @click="del">Delete</button>
+                        <router-link :to="'/empeit/'+ el.id" class="p-1 m-2 rounded bg-yellow-400 text-red">Edit</router-link>
+                        <button class="p-1 m-2 rounded bg-red-400 text-white" @click="del(el.id)">Delete</button>
 
                     </td>
                 </tr>

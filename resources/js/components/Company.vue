@@ -42,8 +42,7 @@ function submit() {
 
 </script>
 <template>
-    <router-link to="/">Home</router-link>
-    <router-link to="/employee">Employee</router-link>
+
     <div
         class="flex place-content-center justify-center place-items-center mt-10 bg-blue-300 text-white ml-72 mr-72 rounded shadow">
         <h2 class="text-[36px] font-bold">Add Company</h2>
@@ -90,7 +89,7 @@ function submit() {
                     </div>
                     <div>
                         <button type="submit"
-                            class="bg-blue-600 hover:bg-blue-800 text-white p-2 rounded shadow-2xl font-bold">Submit</button>
+                            class="bg-sky-600 hover:bg-sky-800 text-white p-2 rounded shadow-2xl font-bold">Save Record</button>
                     </div>
                 </div>
 

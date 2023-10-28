@@ -1,6 +1,12 @@
 <script setup>
 import {ref,onMounted} from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios';
+
+
+const route = useRoute();
+const router=useRouter();
+
 const first_name=ref('')
 const last_name = ref('')
 const company = ref('')
@@ -15,7 +21,7 @@ axios.get('api/company').then(response=>{
 })
 });
 function submit(){
-    alert('submitting')
+
     const formData = new FormData()
     formData.append('first_name',first_name.value)
     formData.append('last_name', last_name.value)
@@ -25,13 +31,16 @@ function submit(){
     formData.append('phone', phone.value)
     axios.post('api/employee',formData).then(
         (response)=>{
-        console.log(response.data)
+            router.push('employees')
     })
 }
 </script>
 
 <template>
-    <h1>Add Employee</h1>
+    <div class="flex place-content-center justify-center mt-10 rounded shadow p-5 ml-72 mr-72 bg-sky-400">
+        <h1 class="text-white text-2xl font-bold">Add Employee</h1>
+
+    </div>
     <div class="flex place-content-center justify-center">
     <div class="w-2/3 p-10 m-10 shadow rounded">
     <form @submit.prevent="submit">
@@ -40,7 +49,7 @@ function submit(){
              <label class="font-bold">First Name</label>
         </div>
         <div>
-            <input class='ring-1 focus:ring-2 p-2 rounded'  type="text" v-model="first_name">
+            <input class='ring-1 focus:ring-2 p-2 rounded w-72'  type="text" v-model="first_name">
         </div>
     </div>
 
@@ -49,7 +58,7 @@ function submit(){
                  <label class="font-bold">Last Name</label>
             </div>
             <div>
-    <input class='ring-1 focus:ring-2 p-2 rounded'  type="text" v-model="last_name">
+    <input class='ring-1 focus:ring-2 p-2 rounded w-72'  type="text" v-model="last_name">
             </div>
         </div>
         <div class="grid grid-cols-2 gap-2 mb-5">
@@ -57,7 +66,7 @@ function submit(){
                  <label class="font-bold">Company</label>
             </div>
             <div>
-                <select v-model="company" class='ring-1 focus:ring-2 p-2 rounded' >
+                <select v-model="company" class='ring-1 focus:ring-2 p-2 rounded w-72' >
                     <option v-for="company in company_list" :value="company.id">{{ company.name }}</option>
                 </select>
             </div>
@@ -68,7 +77,7 @@ function submit(){
                      <label class="font-bold">Email</label>
                 </div>
                 <div>
-                        <input class='ring-1 focus:ring-2 p-2 rounded'  type="email" v-model="email">
+                        <input class='ring-1 focus:ring-2 p-2 rounded w-72'  type="email" v-model="email">
                 </div>
             </div>
              <div class="grid grid-cols-2 gap-2 mb-5">
@@ -76,7 +85,7 @@ function submit(){
                      <label class="font-bold">Phone</label>
                 </div>
                 <div>
-                        <input class='ring-1 focus:ring-2 p-2 rounded'  type="text" v-model="phone">
+                        <input class='ring-1 focus:ring-2 p-2 rounded w-72'  type="text" v-model="phone">
                 </div>
             </div>
              <div class="grid grid-cols-2 gap-2 mb-5">
@@ -84,7 +93,7 @@ function submit(){
 
                     </div>
                     <div>
-                        <button type="submit" class="p-3 bg-blue-400 text-white rounded shadoe-2xl">Add Employee</button>
+                        <button type="submit" class="p-3 bg-sky-600 hover:bg-sky-800 font-bold text-white rounded shadoe-2xl">Add Employee</button>
                     </div>
                 </div>
 

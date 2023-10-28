@@ -10,13 +10,14 @@ class EmployeeService{
         return Employee::find($id);
     }
     public static function showPaginated(){
-        return Employee::paginate(2);
+        //return Employee::paginate(2);
+        return Employee::all();
     }
     public static function showAll(int $count=0):Object{
-            if($count == 0)
+          //  if($count == 0)
             return Employee::all();
 
-            return Employee::paginate($count);
+            //return Employee::paginate($count);
     }
 
     public static function save(array $data):?Employee{
@@ -29,11 +30,11 @@ class EmployeeService{
         ]);
     }
     public static function edit(array $data, $id):?Employee{
+
         $employee=Employee::find($id);
 
-
-            $employee->first_name= $data['first_name'];
-            $employee->last_name=$data['last_name'];
+           $employee->first_name= $data['first_name'];
+           $employee->last_name=$data['last_name'];
             $employee->company_id=$data['company_id'];
             $employee->email=$data['email'];
             $employee->phone=$data['phone'];

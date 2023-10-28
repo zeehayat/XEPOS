@@ -39,7 +39,7 @@ class EmployeeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return EmployeeService::show($id);
     }
 
     /**
@@ -55,7 +55,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        EmployeeService::edit($request->all(), $id);
     }
 
     /**
@@ -63,7 +63,7 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        EmployeeService::delete($id);
     }
 
     public function showAll($count=0){
