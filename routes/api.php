@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,14 @@ Route::delete('/company/{id}',[CompanyController::class,'destroy'])->name('compa
 Route::get('/company',[CompanyController::class,'showAll'])->name('company.show');
 Route::get('/company/{id}',[CompanyController::class,'show'])->name('company.show');
 
+// Employees
+
+Route::post('/employee', [EmployeeController::class, 'store'])->name('employee.store');
+Route::get('/employee/{count?}', [EmployeeController::class, 'showAll'])->name('employee.showAll');
+
 Route::post('/login',[LoginController::class,'login'])->name('login');
+Route::get('/{any}', function () {
+    return view('welcome');
+})->where('any', '.*');
+
+

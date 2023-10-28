@@ -22,7 +22,8 @@ class CompanyController extends Controller
      */
     public function store(CompanyRequest $request)
     {
-        $validated = $request->validated();
+
+        //$validated = $request->validated();
         // $request;
         return CompanyService::save($request->all());
     }

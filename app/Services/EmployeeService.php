@@ -6,15 +6,20 @@ use App\Models\Employee;
 
 class EmployeeService{
 
-    public function show($id):?Employee{
+    public static function show($id):?Employee{
         return Employee::find($id);
     }
-
-    public function showAll():Object{
+    public static function showPaginated(){
+        return Employee::paginate(2);
+    }
+    public static function showAll(int $count=0):Object{
+            if($count == 0)
             return Employee::all();
+
+            return Employee::paginate($count);
     }
 
-    public function save(array $data):?Employee{
+    public static function save(array $data):?Employee{
         return Employee::create([
             'first_name' => $data['first_name'],
             'last_name'=>$data['last_name'],
@@ -23,7 +28,7 @@ class EmployeeService{
             'phone'=>$data['phone']
         ]);
     }
-    public function edit(array $data, $id):?Employee{
+    public static function edit(array $data, $id):?Employee{
         $employee=Employee::find($id);
 
 
@@ -37,7 +42,7 @@ class EmployeeService{
             return $employee;
 
     }
-    public function delete($id):bool{
+    public static function delete($id):bool{
         return Employee::destroy($id);
     }
 }

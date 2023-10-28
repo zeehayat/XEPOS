@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Models\Company;
 class EmployeeRequest extends FormRequest
 {
     /**
@@ -24,7 +24,7 @@ class EmployeeRequest extends FormRequest
         return [
             'first_name' => 'required:min',
             'last_name' => 'required',
-            'company_id' => 'required,exists:Company',
+            'company_id' => 'required',
             'email' => 'email',
         ];
     }

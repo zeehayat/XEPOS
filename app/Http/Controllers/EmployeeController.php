@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\EmployeeRequest;
+use App\Services\EmployeeService;
 
 class EmployeeController extends Controller
 {
@@ -25,9 +27,11 @@ class EmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
-        //
+
+        return EmployeeService::save($request->all());
+
     }
 
     /**
@@ -60,5 +64,11 @@ class EmployeeController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showAll($count=0){
+
+        return  EmployeeService::showAll(0);
+
     }
 }
