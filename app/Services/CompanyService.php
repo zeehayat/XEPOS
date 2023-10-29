@@ -15,7 +15,7 @@ class CompanyService {
     public static function storeLogo(UploadedFile $file) {
 
             $file->storeAs('public/uploads', $file->getClientOriginalName());
-            $filePath = 'public/uploads/' . $file->getClientOriginalName();
+            $filePath = $file->getClientOriginalName();
             return $filePath;
 
     }
@@ -39,14 +39,15 @@ class CompanyService {
     public static function showAll():Object{
         return Company::all();
     }
-        public static function edit(array $data, int $id):?Company{
-            $company=Company::find($id);
-            $filePath = null;
-            if (isset($data['logo'])) {
+    public static function edit(array $data, int $id):?Company{
+           $company=Company::find($id);
+           $filePath = null;
+           if (isset($data['logo'])) {
 
                 $filePath = SELF::storeLogo($data['logo']);
 
             }
+
             $company->email = $data['email'];
             $company->name = $data['name'];
             $company->website = $data['website'];

@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/company',[CompanyController::class,'store'])->name('company.store');
-Route::patch('/company/{id}',[CompanyController::class,'update'])->name('company.update');
+Route::post('/company/{id}',[CompanyController::class,'update'])->name('company.update');
 Route::delete('/company/{id}',[CompanyController::class,'destroy'])->name('company.delete');
 Route::get('/company',[CompanyController::class,'showAll'])->name('company.showAll');
 Route::get('/company/{id}',[CompanyController::class,'show'])->name('company.show');
@@ -36,9 +36,8 @@ Route::get('/employee/{count?}', [EmployeeController::class, 'showAll'])->name('
 Route::get('/employee/get/{id}', [EmployeeController::class, 'show'])->name('employee.show');
 
 Route::post('/login',[LoginController::class,'login'])->name('login');
-Route::get('/{any}', function () {
-    return view('welcome');
-})->where('any', '.*');
+Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
+
 
 
 
