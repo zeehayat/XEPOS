@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\Company;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Mail\CompanyCreated;
+use Illuminate\Support\Facades\Mail;
 
 class CompanyService {
     private $company;
@@ -26,12 +28,16 @@ class CompanyService {
             $filePath=SELF::storeLogo($data['logo']);
         }
 
-        return Company::create([
+
+        $company= Company::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'logo'=>$filePath,  /// If no image is provided then use null
             'website'=>$data['website']
         ]);
+        Mail::to('zeenux@gmail.com’')->send(new CompanyCreated($company));
+
+        return $company;
     }
     public static function show(int $id):?Company{
         return Company::find($id);

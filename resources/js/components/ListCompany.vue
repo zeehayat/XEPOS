@@ -9,7 +9,7 @@ const companies=ref('')
 onMounted(() => {
      axios.get('/api/sanctum').then(response => {
         axios.get('/api/company').then(response => {
-            console.log(response.data)
+
             companies.value = response.data
         })
     })
